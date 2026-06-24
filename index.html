@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dave Good Sleep Studio | หลับลึกกว่าที่เคย</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&family=Kanit:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --forest: #1a3a2e;
+    --forest-mid: #2a5040;
+    --mint: #4a9e7e;
+    --mint-light: #7fcaaa;
+    --glow: #a8e6cc;
+    --cream: #f6f4f0;
+    --warm-white: #fdfcfb;
+    --charcoal: #2c2c2c;
+    --steel: #6b7280;
+    --border: #e5e7eb;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Sarabun', sans-serif;
+    background: var(--warm-white);
+    color: var(--charcoal);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(26, 58, 46, 0.96);
+    backdrop-filter: blur(12px);
+    padding: 0 5vw;
+    height: 68px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid rgba(168,230,204,0.12);
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+  .nav-logo-icon {
+    width: 40px; height: 40px;
+    background: var(--mint);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .nav-logo-text { color: white; }
+  .nav-logo-text strong { font-family: 'Kanit', sans-serif; font-size: 1rem; display: block; line-height: 1.1; }
+  .nav-logo-text span { font-size: 0.7rem; color: var(--glow); opacity: 0.85; }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.78);
+    text-decoration: none; font-size: 0.9rem; font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--glow); }
+
+  .nav-cta {
+    background: var(--mint);
+    color: white; text-decoration: none;
+    padding: 9px 22px; border-radius: 25px;
+    font-size: 0.88rem; font-weight: 600;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background: var(--mint-light); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--forest) 0%, #0f2820 50%, #1a3a2e 100%);
+    display: flex; align-items: center;
+    padding: 68px 5vw 0;
+    position: relative; overflow: hidden;
+  }
+
+  /* ambient glow blobs */
+  .hero::before {
+    content: '';
+    position: absolute; top: 15%; right: 8%;
+    width: 460px; height: 460px;
+    background: radial-gradient(circle, rgba(74,158,126,0.18) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: 10%; left: -5%;
+    width: 340px; height: 340px;
+    background: radial-gradient(circle, rgba(168,230,204,0.08) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; gap: 4rem;
+    position: relative; z-index: 1;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(168,230,204,0.12);
+    border: 1px solid rgba(168,230,204,0.25);
+    color: var(--glow);
+    padding: 6px 16px; border-radius: 20px;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em;
+    margin-bottom: 1.5rem; text-transform: uppercase;
+  }
+
+  .hero-title {
+    font-family: 'Kanit', sans-serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 800;
+    color: white;
+    line-height: 1.15;
+    margin-bottom: 1.2rem;
+  }
+  .hero-title .accent { color: var(--glow); }
+
+  .hero-subtitle {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.68);
+    margin-bottom: 2.2rem;
+    max-width: 460px;
+  }
+
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--mint);
+    color: white; text-decoration: none;
+    padding: 14px 32px; border-radius: 30px;
+    font-size: 0.95rem; font-weight: 700;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 4px 24px rgba(74,158,126,0.35);
+  }
+  .btn-primary:hover { background: #5db896; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(74,158,126,0.45); }
+
+  .btn-outline {
+    border: 1.5px solid rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.85); text-decoration: none;
+    padding: 13px 28px; border-radius: 30px;
+    font-size: 0.95rem; font-weight: 600;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--glow); color: var(--glow); }
+
+  .hero-stats {
+    display: flex; gap: 2rem; margin-top: 2.8rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .stat-num {
+    font-family: 'Kanit', sans-serif; font-size: 1.9rem; font-weight: 700; color: white; line-height: 1;
+  }
+  .stat-num span { color: var(--mint-light); }
+  .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 4px; }
+
+  /* Hero visual — spine/body illustration */
+  .hero-visual {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .hero-body-wrap {
+    position: relative;
+    width: 280px; height: 420px;
+  }
+  .hero-body-bg {
+    width: 280px; height: 420px;
+    background: radial-gradient(ellipse at 50% 40%, rgba(74,158,126,0.22) 0%, transparent 70%);
+    border-radius: 50%;
+    position: absolute; top: 0; left: 0;
+  }
+  .body-svg {
+    width: 100%; height: 100%;
+    position: relative; z-index: 1;
+  }
+
+  /* floating doctor card */
+  .doctor-card {
+    position: absolute; bottom: -20px; left: -40px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(168,230,204,0.2);
+    backdrop-filter: blur(16px);
+    border-radius: 16px;
+    padding: 16px 20px;
+    display: flex; align-items: center; gap: 14px;
+    min-width: 230px;
+  }
+  .doctor-avatar {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--mint) 0%, var(--forest-mid) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .doctor-info strong { display: block; color: white; font-size: 0.88rem; font-weight: 600; }
+  .doctor-info span { font-size: 0.75rem; color: var(--glow); opacity: 0.8; }
+
+  /* ── SECTION BASE ── */
+  section { padding: 90px 5vw; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-tag {
+    display: inline-block;
+    color: var(--mint); font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Kanit', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 700; line-height: 1.25;
+    color: var(--forest);
+    margin-bottom: 1rem;
+  }
+  .section-body {
+    font-size: 1rem; color: var(--steel); max-width: 580px;
+  }
+
+  /* ── WHY SLEEP MATTERS ── */
+  #why { background: var(--cream); }
+
+  .why-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center; margin-top: 3.5rem;
+  }
+
+  .why-points { display: flex; flex-direction: column; gap: 1.6rem; }
+
+  .why-point {
+    display: flex; gap: 1.2rem;
+    padding: 1.4rem 1.6rem;
+    background: white;
+    border-radius: 14px;
+    border-left: 3px solid var(--mint);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .why-point:hover { transform: translateX(4px); box-shadow: 0 6px 24px rgba(0,0,0,0.08); }
+
+  .why-icon {
+    font-size: 1.8rem; flex-shrink: 0;
+    width: 52px; height: 52px; display: flex; align-items: center; justify-content: center;
+    background: rgba(74,158,126,0.1); border-radius: 12px;
+  }
+  .why-point h3 { font-size: 0.98rem; font-weight: 700; color: var(--forest); margin-bottom: 4px; }
+  .why-point p { font-size: 0.88rem; color: var(--steel); line-height: 1.6; }
+
+  .why-visual {
+    position: relative;
+    background: linear-gradient(160deg, var(--forest) 0%, #0d2218 100%);
+    border-radius: 24px;
+    padding: 3rem 2.5rem;
+    color: white;
+    overflow: hidden;
+  }
+  .why-visual::before {
+    content: ''; position: absolute; top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(74,158,126,0.3) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .why-visual h3 {
+    font-family: 'Kanit', sans-serif; font-size: 1.5rem; margin-bottom: 1.5rem;
+    position: relative; z-index: 1;
+  }
+
+  .sleep-cycle {
+    display: flex; flex-direction: column; gap: 1rem;
+    position: relative; z-index: 1;
+  }
+  .cycle-item {
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .cycle-bar-wrap { flex: 1; }
+  .cycle-label { font-size: 0.82rem; color: rgba(255,255,255,0.65); width: 80px; flex-shrink: 0; }
+  .cycle-bar {
+    height: 10px; border-radius: 5px;
+    background: rgba(255,255,255,0.1);
+    position: relative; overflow: hidden;
+  }
+  .cycle-fill {
+    position: absolute; top: 0; left: 0; height: 100%;
+    border-radius: 5px;
+    animation: fillBar 1.4s ease-out forwards;
+    transform-origin: left;
+  }
+  @keyframes fillBar { from { width: 0; } }
+
+  /* ── SERVICES ── */
+  #services { background: white; }
+
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 3.5rem;
+  }
+
+  .service-card {
+    border: 1.5px solid var(--border);
+    border-radius: 18px;
+    padding: 2rem 1.8rem;
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s;
+    cursor: default;
+    position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--mint), var(--mint-light));
+    opacity: 0; transition: opacity 0.25s;
+    border-radius: 18px 18px 0 0;
+  }
+  .service-card:hover { border-color: var(--mint); box-shadow: 0 8px 32px rgba(74,158,126,0.12); transform: translateY(-4px); }
+  .service-card:hover::before { opacity: 1; }
+
+  .service-icon { font-size: 2.4rem; margin-bottom: 1rem; }
+  .service-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--forest); margin-bottom: 0.6rem; }
+  .service-card p { font-size: 0.88rem; color: var(--steel); line-height: 1.65; }
+
+  /* ── PROCESS ── */
+  #process { background: var(--cream); }
+
+  .process-steps {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1rem; margin-top: 3.5rem; position: relative;
+  }
+  .process-steps::before {
+    content: '';
+    position: absolute; top: 36px; left: 10%; right: 10%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--mint), var(--mint-light));
+    z-index: 0;
+  }
+
+  .process-step {
+    text-align: center; padding: 0 1rem; position: relative; z-index: 1;
+  }
+  .step-num {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: var(--forest);
+    color: white;
+    font-family: 'Kanit', sans-serif; font-size: 1.5rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.2rem;
+    border: 3px solid var(--cream);
+    box-shadow: 0 0 0 3px var(--mint);
+  }
+  .process-step h3 { font-size: 0.98rem; font-weight: 700; color: var(--forest); margin-bottom: 0.5rem; }
+  .process-step p { font-size: 0.83rem; color: var(--steel); line-height: 1.6; }
+
+  /* ── ABOUT / DOCTOR ── */
+  #about { background: white; }
+
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1.4fr;
+    gap: 5rem; align-items: center; margin-top: 3.5rem;
+  }
+
+  .about-photo-wrap {
+    position: relative;
+  }
+  .about-photo-bg {
+    width: 100%; aspect-ratio: 3/4;
+    background: linear-gradient(160deg, var(--forest) 0%, var(--forest-mid) 100%);
+    border-radius: 24px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 7rem;
+    color: rgba(255,255,255,0.15);
+    overflow: hidden;
+  }
+  .about-photo-emoji {
+    font-size: 5rem;
+    filter: drop-shadow(0 4px 20px rgba(0,0,0,0.4));
+  }
+
+  .about-badge {
+    position: absolute; bottom: -16px; right: -16px;
+    background: var(--mint);
+    color: white; border-radius: 14px;
+    padding: 12px 18px; text-align: center;
+    box-shadow: 0 6px 24px rgba(74,158,126,0.35);
+  }
+  .about-badge strong { font-family: 'Kanit', sans-serif; font-size: 1.6rem; display: block; line-height: 1; }
+  .about-badge span { font-size: 0.72rem; opacity: 0.9; }
+
+  .about-credentials { display: flex; flex-direction: column; gap: 0.9rem; margin: 1.8rem 0; }
+  .credential {
+    display: flex; align-items: center; gap: 0.8rem;
+    font-size: 0.9rem; color: var(--charcoal);
+  }
+  .credential-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--mint); flex-shrink: 0;
+  }
+
+  /* ── TESTIMONIALS / TRUST ── */
+  #trust { background: var(--forest); color: white; }
+
+  .trust-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 3.5rem;
+  }
+
+  .trust-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 1.8rem;
+    transition: border-color 0.2s;
+  }
+  .trust-card:hover { border-color: rgba(168,230,204,0.3); }
+
+  .trust-stars { color: #fbbf24; font-size: 1rem; margin-bottom: 1rem; }
+  .trust-text { font-size: 0.9rem; color: rgba(255,255,255,0.72); line-height: 1.7; margin-bottom: 1.2rem; }
+  .trust-author { font-size: 0.82rem; color: var(--glow); font-weight: 600; }
+
+  /* ── CTA FINAL ── */
+  #contact { background: white; }
+
+  .cta-box {
+    background: linear-gradient(135deg, var(--forest) 0%, #0f2820 100%);
+    border-radius: 28px;
+    padding: 4rem 5rem;
+    text-align: center;
+    color: white;
+    position: relative; overflow: hidden;
+    margin-top: 0;
+  }
+  .cta-box::before {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(74,158,126,0.25) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .cta-box h2 {
+    font-family: 'Kanit', sans-serif; font-size: 2.2rem; font-weight: 800;
+    margin-bottom: 0.8rem; position: relative; z-index: 1;
+  }
+  .cta-box p { color: rgba(255,255,255,0.68); margin-bottom: 2rem; position: relative; z-index: 1; }
+
+  .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+
+  .btn-fb {
+    background: #1877f2; color: white; text-decoration: none;
+    padding: 13px 28px; border-radius: 25px;
+    font-size: 0.9rem; font-weight: 700;
+    transition: background 0.2s, transform 0.15s;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .btn-fb:hover { background: #1565c0; transform: translateY(-1px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0a1f18;
+    color: rgba(255,255,255,0.55);
+    padding: 2.5rem 5vw;
+    text-align: center;
+    font-size: 0.85rem;
+  }
+  footer a { color: var(--glow); text-decoration: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero-inner, .why-grid, .about-grid { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .process-steps::before { display: none; }
+    .trust-grid { grid-template-columns: 1fr; }
+    .cta-box { padding: 3rem 2rem; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 580px) {
+    .services-grid, .process-steps { grid-template-columns: 1fr; }
+    .why-grid { gap: 2.5rem; }
+    .about-grid { gap: 2.5rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">🌙</div>
+    <div class="nav-logo-text">
+      <strong>Dave Good Sleep Studio</strong>
+      <span>โดยนักกายภาพบำบัดวิชาชีพ</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#why">เกี่ยวกับการนอน</a></li>
+    <li><a href="#services">บริการ</a></li>
+    <li><a href="#about">ผู้เชี่ยวชาญ</a></li>
+    <li><a href="#trust">รีวิว</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">นัดปรึกษา</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-eyebrow">🏆 &nbsp;โดยนักกายภาพบำบัดวิชาชีพ</div>
+      <h1 class="hero-title">
+        หลับลึก<br>
+        <span class="accent">กว่าที่เคย</span><br>
+        ด้วยวิทยาศาสตร์
+      </h1>
+      <p class="hero-subtitle">
+        Dave Good Sleep Studio ดูแลปัญหาการนอนด้วยองค์ความรู้ด้านกายภาพบำบัด
+        ตั้งแต่การวิเคราะห์ท่านอน ไปจนถึงการเลือกหมอนที่เหมาะกับสรีระคุณ
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">นัดปรึกษาฟรี →</a>
+        <a href="#services" class="btn-outline">ดูบริการทั้งหมด</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">500<span>+</span></div>
+          <div class="stat-label">ผู้ได้รับการดูแล</div>
+        </div>
+        <div>
+          <div class="stat-num">5<span>★</span></div>
+          <div class="stat-label">คะแนนความพึงพอใจ</div>
+        </div>
+        <div>
+          <div class="stat-num">10<span>+ ปี</span></div>
+          <div class="stat-label">ประสบการณ์กายภาพ</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-body-wrap">
+        <div class="hero-body-bg"></div>
+        <!-- Spine/nervous system SVG illustration -->
+        <svg class="body-svg" viewBox="0 0 280 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Body silhouette -->
+          <ellipse cx="140" cy="90" rx="48" ry="52" fill="rgba(74,158,126,0.12)" stroke="rgba(74,158,126,0.3)" stroke-width="1.5"/>
+          <!-- Neck -->
+          <rect x="128" y="138" width="24" height="28" rx="8" fill="rgba(74,158,126,0.1)" stroke="rgba(74,158,126,0.25)" stroke-width="1.5"/>
+          <!-- Torso -->
+          <path d="M90 170 Q80 200 82 250 Q84 290 100 320 L140 328 L180 320 Q196 290 198 250 Q200 200 190 170 Q170 162 140 160 Q110 162 90 170Z" fill="rgba(74,158,126,0.08)" stroke="rgba(74,158,126,0.2)" stroke-width="1.5"/>
+          <!-- Spine line -->
+          <line x1="140" y1="148" x2="140" y2="320" stroke="rgba(168,230,204,0.6)" stroke-width="3" stroke-linecap="round"/>
+          <!-- Vertebrae -->
+          <rect x="133" y="158" width="14" height="9" rx="3" fill="rgba(74,158,126,0.5)"/>
+          <rect x="133" y="172" width="14" height="9" rx="3" fill="rgba(74,158,126,0.5)"/>
+          <rect x="133" y="186" width="14" height="9" rx="3" fill="rgba(74,158,126,0.45)"/>
+          <rect x="133" y="200" width="14" height="9" rx="3" fill="rgba(74,158,126,0.4)"/>
+          <rect x="133" y="214" width="14" height="9" rx="3" fill="rgba(74,158,126,0.4)"/>
+          <rect x="133" y="228" width="14" height="9" rx="3" fill="rgba(74,158,126,0.35)"/>
+          <rect x="133" y="242" width="14" height="9" rx="3" fill="rgba(74,158,126,0.35)"/>
+          <rect x="133" y="256" width="14" height="9" rx="3" fill="rgba(74,158,126,0.3)"/>
+          <rect x="133" y="270" width="14" height="9" rx="3" fill="rgba(74,158,126,0.3)"/>
+          <rect x="133" y="284" width="14" height="9" rx="3" fill="rgba(74,158,126,0.25)"/>
+          <!-- Nerve branches -->
+          <line x1="140" y1="175" x2="108" y2="185" stroke="rgba(168,230,204,0.3)" stroke-width="1.5"/>
+          <line x1="140" y1="175" x2="172" y2="185" stroke="rgba(168,230,204,0.3)" stroke-width="1.5"/>
+          <line x1="140" y1="205" x2="100" y2="220" stroke="rgba(168,230,204,0.25)" stroke-width="1.5"/>
+          <line x1="140" y1="205" x2="180" y2="220" stroke="rgba(168,230,204,0.25)" stroke-width="1.5"/>
+          <line x1="140" y1="235" x2="95" y2="252" stroke="rgba(168,230,204,0.2)" stroke-width="1.5"/>
+          <line x1="140" y1="235" x2="185" y2="252" stroke="rgba(168,230,204,0.2)" stroke-width="1.5"/>
+          <!-- Glow dots on spine -->
+          <circle cx="140" cy="165" r="3.5" fill="#7fcaaa" opacity="0.9"/>
+          <circle cx="140" cy="210" r="3.5" fill="#7fcaaa" opacity="0.75"/>
+          <circle cx="140" cy="255" r="3.5" fill="#7fcaaa" opacity="0.6"/>
+          <circle cx="140" cy="295" r="3.5" fill="#7fcaaa" opacity="0.45"/>
+          <!-- Sleep ZZZ -->
+          <text x="195" y="115" fill="rgba(168,230,204,0.7)" font-size="14" font-family="Kanit" font-weight="700">z</text>
+          <text x="207" y="103" fill="rgba(168,230,204,0.5)" font-size="12">z</text>
+          <text x="217" y="93" fill="rgba(168,230,204,0.3)" font-size="10">z</text>
+        </svg>
+      </div>
+      <!-- Doctor card -->
+      <div class="doctor-card">
+        <div class="doctor-avatar">👨‍⚕️</div>
+        <div class="doctor-info">
+          <strong>กภ.ชินาธิป นุโรจน์</strong>
+          <span>CEO & Physiotherapist</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY SLEEP MATTERS -->
+<section id="why">
+  <div class="section-inner">
+    <span class="section-tag">ทำไมต้องดูแลการนอน</span>
+    <h2 class="section-title">การนอนที่ดีเริ่มต้นที่<br>สรีระที่ถูกต้อง</h2>
+    <p class="section-body">การนอนไม่ใช่แค่เรื่องของความง่วง แต่เกี่ยวข้องโดยตรงกับกระดูกสันหลัง กล้ามเนื้อ และระบบประสาท</p>
+
+    <div class="why-grid">
+      <div class="why-points">
+        <div class="why-point">
+          <div class="why-icon">🦴</div>
+          <div>
+            <h3>กระดูกสันหลังกับการนอน</h3>
+            <p>ท่านอนที่ไม่ถูกต้องสร้างแรงกดทับต่อกระดูกสันหลังตลอดคืน ส่งผลให้ปวดหลัง ปวดคอสะสมในระยะยาว</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-icon">🧠</div>
+          <div>
+            <h3>ระบบประสาทกับคุณภาพการหลับ</h3>
+            <p>เมื่อกระดูกสันหลังรองรับสรีระได้ถูกต้อง ระบบประสาทพักผ่อนได้เต็มที่ ส่งผลต่อสมาธิและพลังงานในวันถัดไป</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-icon">🌡️</div>
+          <div>
+            <h3>หมอนที่เหมาะกับสรีระ</h3>
+            <p>ความสูง ความแข็ง และวัสดุของหมอนส่งผลต่อการจัดแนวกระดูกคอโดยตรง ไม่มีขนาดสากลที่เหมาะกับทุกคน</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-icon">💊</div>
+          <div>
+            <h3>แก้ที่ต้นเหตุ ไม่ใช่แค่อาการ</h3>
+            <p>การนอนไม่หลับ ปวดกล้ามเนื้อตื่นมา มักมีสาเหตุด้านสรีระที่แก้ได้ โดยไม่ต้องพึ่งยา</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="why-visual">
+        <h3>วงจรการนอนหลับที่ดี</h3>
+        <div class="sleep-cycle">
+          <div class="cycle-item">
+            <div class="cycle-label">NREM Stage 1</div>
+            <div class="cycle-bar-wrap">
+              <div class="cycle-bar">
+                <div class="cycle-fill" style="width:20%; background:rgba(168,230,204,0.5);"></div>
+              </div>
+            </div>
+            <span style="font-size:0.75rem; color:rgba(255,255,255,0.4); width:40px; text-align:right;">5%</span>
+          </div>
+          <div class="cycle-item">
+            <div class="cycle-label">NREM Stage 2</div>
+            <div class="cycle-bar-wrap">
+              <div class="cycle-bar">
+                <div class="cycle-fill" style="width:55%; background:rgba(168,230,204,0.6);"></div>
+              </div>
+            </div>
+            <span style="font-size:0.75rem; color:rgba(255,255,255,0.4); width:40px; text-align:right;">45%</span>
+          </div>
+          <div class="cycle-item">
+            <div class="cycle-label">Deep Sleep</div>
+            <div class="cycle-bar-wrap">
+              <div class="cycle-bar">
+                <div class="cycle-fill" style="width:30%; background:rgba(74,158,126,0.9);"></div>
+              </div>
+            </div>
+            <span style="font-size:0.75rem; color:rgba(255,255,255,0.4); width:40px; text-align:right;">25%</span>
+          </div>
+          <div class="cycle-item">
+            <div class="cycle-label">REM Sleep</div>
+            <div class="cycle-bar-wrap">
+              <div class="cycle-bar">
+                <div class="cycle-fill" style="width:30%; background:rgba(127,202,170,0.8);"></div>
+              </div>
+            </div>
+            <span style="font-size:0.75rem; color:rgba(255,255,255,0.4); width:40px; text-align:right;">25%</span>
+          </div>
+        </div>
+        <p style="margin-top:1.8rem; font-size:0.82rem; color:rgba(255,255,255,0.5); line-height:1.6;">
+          Deep Sleep คือช่วงที่ร่างกายซ่อมแซมตัวเองมากที่สุด การนอนในท่าที่ถูกต้องช่วยให้เข้าถึง Deep Sleep ได้ง่ายขึ้น
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <span class="section-tag">บริการของเรา</span>
+    <h2 class="section-title">ดูแลครบวงจร<br>ตั้งแต่วิเคราะห์จนถึงติดตามผล</h2>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🔍</div>
+        <h3>วิเคราะห์ปัญหาการนอน</h3>
+        <p>ประเมินสรีระ ท่านอน และปัจจัยกายภาพที่ส่งผลต่อคุณภาพการหลับของคุณอย่างเป็นระบบ</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🛏️</div>
+        <h3>เลือกหมอนตามสรีระ</h3>
+        <p>วัดและแนะนำหมอนที่เหมาะสมกับรูปร่าง ท่านอน และปัญหาเฉพาะตัว ไม่ใช่การขายแบบเหมารวม</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🧘</div>
+        <h3>โปรแกรมกายภาพก่อนนอน</h3>
+        <p>ชุดออกกำลังกายและยืดเส้นที่ออกแบบเฉพาะ เพื่อลดความตึงกล้ามเนื้อและเตรียมร่างกายสู่การนอนหลับ</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💆</div>
+        <h3>บำบัดอาการปวดจากการนอน</h3>
+        <p>รักษาอาการปวดหลัง ปวดคอ ชาแขน ที่เกิดจากท่านอนไม่ถูกต้องสะสมมานาน</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📋</div>
+        <h3>ให้คำปรึกษาออนไลน์</h3>
+        <p>ปรึกษาผ่านวิดีโอคอลกับนักกายภาพบำบัดโดยตรง สะดวก ประหยัดเวลา และเข้าถึงได้ทุกที่</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📈</div>
+        <h3>ติดตามความก้าวหน้า</h3>
+        <p>ประเมินผลและปรับแผนการดูแลอย่างต่อเนื่อง เพื่อให้คุณหลับลึกขึ้นและตื่นมาสดชื่นมากขึ้นจริง</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-inner">
+    <span class="section-tag">ขั้นตอนการดูแล</span>
+    <h2 class="section-title">เริ่มต้นง่าย ผลลัพธ์ชัดเจน</h2>
+
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-num">1</div>
+        <h3>นัดปรึกษาครั้งแรก</h3>
+        <p>พูดคุยถึงปัญหาและเป้าหมาย ผ่านช่องทางที่สะดวกสำหรับคุณ</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">2</div>
+        <h3>ประเมินสรีระ</h3>
+        <p>วิเคราะห์ท่านอน กระดูกสันหลัง และกล้ามเนื้ออย่างละเอียด</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">3</div>
+        <h3>วางแผนการดูแล</h3>
+        <p>ออกแบบโปรแกรมเฉพาะตัว รวมถึงแนะนำอุปกรณ์หากจำเป็น</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">4</div>
+        <h3>ติดตามและปรับแผน</h3>
+        <p>ประเมินผลสม่ำเสมอ ปรับแผนตามพัฒนาการจริงของคุณ</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT DOCTOR -->
+<section id="about">
+  <div class="section-inner">
+    <span class="section-tag">ผู้เชี่ยวชาญ</span>
+    <h2 class="section-title">รู้จักกับ<br>กภ.ชินาธิป นุโรจน์</h2>
+
+    <div class="about-grid">
+      <div class="about-photo-wrap">
+        <div class="about-photo-bg">
+          <div class="about-photo-emoji">👨‍⚕️</div>
+        </div>
+        <div class="about-badge">
+          <strong>Neuro PT</strong>
+          <span>ผู้เชี่ยวชาญระบบประสาท</span>
+        </div>
+      </div>
+
+      <div class="about-text">
+        <p style="font-size:1rem; color:var(--steel); line-height:1.8; margin-bottom:1.5rem;">
+          กภ.ชินาธิป นุโรจน์ เป็นนักกายภาพบำบัดวิชาชีพที่มีความเชี่ยวชาญด้านระบบประสาทและกระดูกสันหลัง
+          ด้วยประสบการณ์ทางคลินิกที่หลากหลาย จึงเข้าใจความสัมพันธ์ระหว่างสรีระมนุษย์กับคุณภาพการนอนหลับอย่างลึกซึ้ง
+        </p>
+        <p style="font-size:1rem; color:var(--steel); line-height:1.8; margin-bottom:1.8rem;">
+          ความแตกต่างของ Dave Good Sleep Studio คือการดูแลที่มองทั้งร่างกายเป็นระบบ ไม่ใช่แค่การขายผลิตภัณฑ์
+          แต่เป็นการหาสาเหตุที่แท้จริงและแก้ไขอย่างยั่งยืน
+        </p>
+        <div class="about-credentials">
+          <div class="credential">
+            <div class="credential-dot"></div>
+            <span>ปริญญาตรีกายภาพบำบัด (วิชาชีพ)</span>
+          </div>
+          <div class="credential">
+            <div class="credential-dot"></div>
+            <span>ผู้เชี่ยวชาญด้าน Neurological Physiotherapy</span>
+          </div>
+          <div class="credential">
+            <div class="credential-dot"></div>
+            <span>CEO and Founder — Dave Good Sleep Studio</span>
+          </div>
+          <div class="credential">
+            <div class="credential-dot"></div>
+            <span>ประสบการณ์ดูแลผู้ป่วยกว่า 10 ปี</span>
+          </div>
+        </div>
+        <a href="#contact" class="btn-primary" style="display:inline-block;">นัดปรึกษากับผู้เชี่ยวชาญ →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST / REVIEWS -->
+<section id="trust">
+  <div class="section-inner">
+    <span class="section-tag" style="color:var(--glow);">รีวิวจากผู้ใช้จริง</span>
+    <h2 class="section-title" style="color:white;">เสียงจากคนที่หลับได้ดีขึ้น</h2>
+
+    <div class="trust-grid">
+      <div class="trust-card">
+        <div class="trust-stars">★★★★★</div>
+        <p class="trust-text">
+          "ปวดต้นคอมาหลายปีแต่ไม่รู้ว่าเกิดจากหมอน หลังจากให้คุณหมอวิเคราะห์ท่านอนและเปลี่ยนหมอน อาการดีขึ้นภายใน 2 สัปดาห์"
+        </p>
+        <div class="trust-author">คุณสมหญิง ว. — กรุงเทพฯ</div>
+      </div>
+      <div class="trust-card">
+        <div class="trust-stars">★★★★★</div>
+        <p class="trust-text">
+          "ไม่เคยคิดว่าการนอนจะมีหลักวิทยาศาสตร์ขนาดนี้ คุณหมออธิบายได้เข้าใจมาก และโปรแกรมยืดกล้ามเนื้อก่อนนอนช่วยได้จริง"
+        </p>
+        <div class="trust-author">คุณนาวา ก. — เชียงใหม่</div>
+      </div>
+      <div class="trust-card">
+        <div class="trust-stars">★★★★★</div>
+        <p class="trust-text">
+          "ตื่นมาแล้วไม่ปวดหลังอีกต่อไป นี่คือสิ่งที่ฝันมาตลอด ขอบคุณ Dave Good Sleep Studio มากๆ ครับ"
+        </p>
+        <div class="trust-author">คุณธีรพงษ์ ม. — นนทบุรี</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="cta-box">
+      <h2>พร้อมหลับลึกกว่าที่เคยแล้วหรือยัง?</h2>
+      <p>ปรึกษาฟรีกับนักกายภาพบำบัดวิชาชีพ เริ่มต้นได้วันนี้ผ่านช่องทางที่สะดวกสำหรับคุณ</p>
+      <div class="cta-buttons">
+        <a href="https://www.facebook.com/share/1bSKuxdyRu/" target="_blank" class="btn-fb">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          ติดต่อผ่าน Facebook
+        </a>
+        <a href="#" class="btn-primary" style="background:rgba(255,255,255,0.12); box-shadow:none; border:1.5px solid rgba(255,255,255,0.25);">
+          📞 โทรนัดปรึกษา
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="margin-bottom:0.5rem;">
+    <strong style="color:rgba(255,255,255,0.7); font-family:'Kanit',sans-serif;">Dave Good Sleep Studio</strong>
+  </p>
+  <p>ดูแลและให้คำปรึกษาโดยนักกายภาพบำบัดวิชาชีพ &nbsp;|&nbsp;
+    <a href="https://www.facebook.com/share/1bSKuxdyRu/" target="_blank">Facebook Page</a>
+  </p>
+  <p style="margin-top:0.5rem; font-size:0.78rem; opacity:0.4;">© 2025 Dave Good Sleep Studio. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
